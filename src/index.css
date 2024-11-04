@@ -19,10 +19,60 @@ h1{
 .catButton{
   margin: 1%;
 }
+.highlightedcatButton{
+  margin: 1%;
+  background-color: red;
+}
 
 .flexItem{
   margin: 2%;
 }
+
+.vote {
+  display: flex;
+  flex-wrap: wrap;
+  justify-self: center;
+}
+
+/* .articlePage {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap; 
+  align-items: flex-start;
+} */
+
+.articleTitle {
+  align-self: stretch;
+  width: 100%;
+}
+
+.articleBody {
+  flex-grow: 1; 
+  align-self: stretch;
+  width: 60%;
+  margin: 5%;
+}
+
+.articleButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.articleViewComments{
+  align-self: center;
+  margin: 5%;
+}
+
+.articleImage {
+  width: 40%;
+}
+.articleContents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 5%;
+}
+
 
 .randomArticle{
   grid-column: span 2;

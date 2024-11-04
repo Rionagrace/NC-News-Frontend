@@ -1,10 +1,12 @@
 
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 export function ArticleCard (props) {
 
 const {article} = props
   return (
+    <Link to={`articles/${article.article_id}`}>
     <Card className="flexItem" >
     <Card.Header>{article.title}</Card.Header>
     <Card.Body>
@@ -13,13 +15,15 @@ const {article} = props
     </Card.Body>
     <Card.Img variant="bottom" src={article.article_img_url} />
   </Card>
+  </Link>
   )
 }
 
 export function RandomArticleCard (props) {
   const {article} = props
   return (
-    <Card >
+    <Link to={`articles/${article.article_id}`}>
+    <Card>
     <Card.Header>{article.title}</Card.Header>
     <Card.Img variant="top" src={article.article_img_url} />
     <Card.Body>
@@ -28,6 +32,7 @@ export function RandomArticleCard (props) {
       <Card.Text>{article.body}</Card.Text>
     </Card.Body>
   </Card>
+  </Link>
   )
 
 }
