@@ -27,6 +27,8 @@ function Articles() {
 			// });
 	}, []);
 
+  //I was trying to make the first result be a larger random article with more info, but this only worked 50% of the time^^^^ cant work out why so will come back to it 
+
 	return (
 		<>
 			<section className="resultsFlex">
