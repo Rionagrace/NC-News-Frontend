@@ -34,6 +34,7 @@ function Article (){
     <>
     <section className="articlePage">
     <h1 className="articleTitle">{article.title}, by {article.author}</h1>
+    <p>Topic: {article.topic}</p>
     <section className="articleContents">
     <img className="articleImage" src={article.article_img_url}/>
     <p className="articleBody">{article.body}</p>

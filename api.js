@@ -8,9 +8,14 @@ export function getCategories() {
 		});
 }
 
-export function getArticles() {
+export function getArticles(category) {
 	return axios
-		.get(`https://nc-news-2e8v.onrender.com/api/articles`)
+		.get(`https://nc-news-2e8v.onrender.com/api/articles`, {
+      params: {
+        topic: category
+      },
+    }
+    )
 		.then((results) => {
 			return results.data.articles;
 		});

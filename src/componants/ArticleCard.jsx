@@ -6,7 +6,7 @@ export function ArticleCard (props) {
 
 const {article} = props
   return (
-    <Link to={`articles/${article.article_id}`}>
+    <Link to={`/articles/${article.article_id}`}>
     <Card className="flexItem" >
     <Card.Header>{article.title}</Card.Header>
     <Card.Body>
