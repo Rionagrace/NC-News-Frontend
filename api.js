@@ -47,3 +47,8 @@ export function validateUser(user) {
   export function updateVotes (id, vote){
     return axios.patch(`https://nc-news-2e8v.onrender.com/api/articles/${id}`, {inc_votes: vote})
   }
+
+
+  export function postComment (id, comment){
+    return axios.post(`https://nc-news-2e8v.onrender.com/api/articles/${id}/comments`, comment)
+  }
