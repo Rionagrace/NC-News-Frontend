@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { validateUser } from "../../api";
 import UserContext from "../contexts/userContext";
+import categoryContext from "../contexts/categoryContexts";
 
 function Login (){
 
@@ -14,7 +15,12 @@ function Login (){
     setTestUser(event.target.username.value);
   }
 
+  const {setCategory} = useContext(categoryContext)
+
+
+
   useEffect(() => {
+    setCategory("")
     validateUser(testUser)
       .then((result) => {
         setUser(testUser);
