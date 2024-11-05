@@ -2,20 +2,29 @@ import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getArticleById } from "../../api"
 import categoryContext from "../contexts/categoryContexts"
+import Comments from "./Comments"
+import Vote from "./Vote"
 
 function Article (){
   const {article_id} = useParams()
   const [article, setArticle] = useState({})
   const {setCategory} = useContext(categoryContext)
+  const [viewComments, setViewComments] = useState(false)
+
+  function handleComments (){
+    if(viewComments){
+      setViewComments(false)
+    }else
+    setViewComments(true)
+  }
 
   useEffect(() => {
-
     getArticleById(article_id)
     .then((results) => {
       setArticle(results)
       setCategory(results.topic)
     })
-  })
+  }, [])
   return (
     <>
     <section className="articlePage">
@@ -25,14 +34,11 @@ function Article (){
     <p className="articleBody">{article.body}</p>
     </section>
     <section className="articleButtons">
-    <section className="vote">
-    <button>+</button>
-    <button>-</button>
-    <p>{article.votes}</p>
-    </section>
-    <button className="articleViewComments">View Comments: {article.comment_count}</button>
+    <Vote article={article}/>
+    <button className="articleViewComments" onClick={handleComments}>{viewComments ? "hide comments" : `View Comments:  ${article.comment_count}`}</button>
     </section>
     </section>
+    {viewComments ? <Comments article_id={article.article_id}/> : null}
     </>
   )
 }
