@@ -1,17 +1,26 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getArticleById, getArticles, getRandomArticleId } from "../../api";
 
 import {ArticleCard, RandomArticleCard}from "./ArticleCard";
+import { useParams } from "react-router-dom";
+import { useCol } from "react-bootstrap/esm/Col";
+import categoryContext from "../contexts/categoryContexts";
 
 function Articles() {
 	const [articles, setArticles] = useState([]);
 	const [randomArticle, setRandomArticle] = useState({});
+  const {topic} = useParams()
+  const [loaded, setLoaded] = useState(false)
+  const {setCategory} = useContext(categoryContext)
 
 	useEffect(() => {
-		getArticles()
+    if(topic){
+      setCategory(topic)
+    }
+		getArticles(topic)
 			.then((results) => {
 				setArticles(results);
-        return results
+        setLoaded(true)
 			})
 			// .then((results) => {
 			// return	getRandomArticleId(results.length);
@@ -25,8 +34,9 @@ function Articles() {
 			// 	setRandomArticle(result);
       //   console.log(randomArticle)
 			// });
-	}, []);
+	}, [topic]);
 
+if(loaded){
 	return (
 		<>
 			<section className="resultsFlex">
@@ -36,6 +46,8 @@ function Articles() {
 			</section>
 		</>
 	);
+}
+else return <p>Loading...</p>
 }
 
 export default Articles;

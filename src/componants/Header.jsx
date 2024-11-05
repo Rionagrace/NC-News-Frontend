@@ -37,15 +37,19 @@ function Header() {
 					{categories.map((Acategory) => {
 						if (category === Acategory.slug) {
 							return (
-								<button className="highlightedcatButton" key={Acategory.slug}>
+                <Link to={`/${Acategory.slug}`} key={Acategory.slug}>
+								<button className="highlightedcatButton" >
 									{Acategory.slug}
 								</button>
+                </Link>
 							);
 						}
 						return (
-							<button className="catButton" key={Acategory.slug}>
+              <Link to={`/${Acategory.slug}`} key={Acategory.slug}>
+							<button className="catButton" >
 								{Acategory.slug}
 							</button>
+              </Link>
 						);
 					})}
 				</nav>

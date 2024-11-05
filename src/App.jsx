@@ -6,6 +6,7 @@ import Article from './componants/Article';
 import categoryContext from './contexts/categoryContexts';
 import Login from './componants/Login';
 import UserContext from './contexts/userContext';
+import Articles from './componants/Articles';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/articles/:article_id" element={<Article/>}/>
           <Route path="/log-in" element={<Login/>}/>
+          <Route path="/:topic" element={<Articles/>}/>
         </Routes>
       </section>
     
