@@ -29,4 +29,10 @@ export function getArticleById(id) {
 		});
 }
 
-
+export function validateUser(user) {
+  return axios
+    .get(`https://nc-news-2e8v.onrender.com/api/users/${user}`)
+    .then((results) => {
+      return results;
+    });
+  }
