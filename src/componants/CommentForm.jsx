@@ -29,10 +29,11 @@ setLoaded(true);
 
 useEffect(() => {
   if (loaded) {
+    setButtonDisabled(true)
     postComment(article_id, comment).then((results) => {
       document.getElementById("postForm").reset()
       setLoadedComment(results.data.comment)
-      setButtonDisabled(true)
+      
     })
     .catch((err) => {
       setLoadedComment({});

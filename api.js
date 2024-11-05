@@ -52,3 +52,7 @@ export function validateUser(user) {
   export function postComment (id, comment){
     return axios.post(`https://nc-news-2e8v.onrender.com/api/articles/${id}/comments`, comment)
   }
+
+  export function deleteComment(id){
+    return axios.delete(`https://nc-news-2e8v.onrender.com/api/comments/${id}`)
+  }
