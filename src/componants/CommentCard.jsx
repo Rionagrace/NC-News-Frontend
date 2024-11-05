@@ -11,7 +11,7 @@ function CommentCard (props) {
     <Card.Body>
       <Card.Text>{comment.body}</Card.Text>
       <Card.Text>{comment.created_at}</Card.Text>
-      <Vote article={comment}/>
+      <Vote comment={comment}/>
       </Card.Body>
   </Card>
 

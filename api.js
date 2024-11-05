@@ -43,3 +43,7 @@ export function validateUser(user) {
       return results.data.comments;
     })
   }
+
+  export function updateVotes (id, vote){
+    return axios.patch(`https://nc-news-2e8v.onrender.com/api/articles/${id}`, {inc_votes: vote})
+  }

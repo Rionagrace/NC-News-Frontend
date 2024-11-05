@@ -10,6 +10,8 @@ function Article (){
   const [article, setArticle] = useState({})
   const {setCategory} = useContext(categoryContext)
   const [viewComments, setViewComments] = useState(false)
+  const [loaded, setLoaded] = useState(false)
+
 
   function handleComments (){
     if(viewComments){
@@ -23,8 +25,11 @@ function Article (){
     .then((results) => {
       setArticle(results)
       setCategory(results.topic)
+      setLoaded(true)
     })
   }, [])
+
+  if(loaded){
   return (
     <>
     <section className="articlePage">
@@ -41,6 +46,9 @@ function Article (){
     {viewComments ? <Comments article_id={article.article_id}/> : null}
     </>
   )
+}
+if(!loaded)
+  return <p>Loading....</p>
 }
 
 export default Article
