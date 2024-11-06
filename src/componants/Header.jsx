@@ -39,7 +39,7 @@ function Header() {
 					{categories.map((Acategory) => {
 						if (category === Acategory.slug) {
 							return (
-                <Link to={`/${Acategory.slug}`} key={Acategory.slug} reloadDocument>
+                <Link to={`/${Acategory.slug}`} key={Acategory.slug} reloadDocument >
 								<button className="highlightedcatButton" >
 									{Acategory.slug}
 								</button>
@@ -47,7 +47,7 @@ function Header() {
 							);
 						}
 						return (
-              <Link to={`/${Acategory.slug}`} key={Acategory.slug} >
+              <Link to={`/${Acategory.slug}`} key={Acategory.slug} reloadDocument >
 							<button className="catButton" >
 								{Acategory.slug}
 							</button>

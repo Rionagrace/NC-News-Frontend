@@ -22,7 +22,7 @@ function CommentCard (props) {
 
   useEffect(() => {
     if(loaded){
-      setCommentDeleted(true)
+      setCommentDeleted ? setCommentDeleted(true) : null
       setDeleted(true)
       deleteComment(commentId)
       .catch((err) => {
