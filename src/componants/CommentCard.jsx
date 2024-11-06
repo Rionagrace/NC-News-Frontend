@@ -12,6 +12,7 @@ function CommentCard (props) {
   const [loaded, setLoaded] = useState(false)
   const [deleted, setDeleted] = useState(false)
   const [error, setError] = useState('')
+  const {setCommentDeleted} = props
 
   function handleDelete (event){
     event.preventDefault();
@@ -21,6 +22,7 @@ function CommentCard (props) {
 
   useEffect(() => {
     if(loaded){
+      setCommentDeleted(true)
       setDeleted(true)
       deleteComment(commentId)
       .catch((err) => {

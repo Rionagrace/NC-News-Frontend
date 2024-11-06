@@ -13,6 +13,7 @@ function CommentForm (){
   const [loadedComment, setLoadedComment] = useState({})
   const [error, setError] = useState('')
   const [buttonDisabled, setButtonDisabled] = useState(false)
+  const [commentDeleted, setCommentDeleted] = useState(false)
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -23,8 +24,6 @@ function handleSubmit(event) {
   }
 setComment(comment)
 setLoaded(true);
-
-
 }
 
 useEffect(() => {
@@ -33,7 +32,6 @@ useEffect(() => {
     postComment(article_id, comment).then((results) => {
       document.getElementById("postForm").reset()
       setLoadedComment(results.data.comment)
-      
     })
     .catch((err) => {
       setLoadedComment({});
@@ -41,6 +39,12 @@ useEffect(() => {
     })
   }
 }, [comment]);
+
+useEffect(() => {
+  if(commentDeleted){
+    setButtonDisabled(false)
+  }
+},[commentDeleted])
 
   return (
     <>
@@ -54,7 +58,7 @@ useEffect(() => {
 <input id="commentBody" type="text" required></input>
 <button disabled={buttonDisabled} type="submit">Post</button>
     </form>
-    {loaded ? <CommentCard comment={loadedComment}/> : null}
+    {loaded ? <CommentCard comment={loadedComment} setCommentDeleted={setCommentDeleted}/> : null}
     {error ? <p>{error}</p> : null}
     </>
   )
