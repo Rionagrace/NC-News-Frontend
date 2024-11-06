@@ -8,11 +8,13 @@ export function getCategories() {
 		});
 }
 
-export function getArticles(category) {
+export function getArticles(category, sort_by, order) {
 	return axios
 		.get(`https://nc-news-2e8v.onrender.com/api/articles`, {
       params: {
-        topic: category
+        topic: category,
+        sort_by: sort_by,
+        order: order
       },
     }
     )
@@ -52,6 +54,9 @@ export function validateUser(user) {
   export function updateVotes (id, vote){
     return axios.patch(`https://nc-news-2e8v.onrender.com/api/articles/${id}`, {inc_votes: vote})
   }
+  export function updateCommentVotes (id, vote){
+    return axios.patch(`https://nc-news-2e8v.onrender.com/api/comments/${id}`, {inc_votes: vote})
+  }
 
 
   export function postComment (id, comment){
@@ -61,3 +66,4 @@ export function validateUser(user) {
   export function deleteComment(id){
     return axios.delete(`https://nc-news-2e8v.onrender.com/api/comments/${id}`)
   }
+

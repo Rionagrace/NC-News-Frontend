@@ -12,12 +12,11 @@ function App() {
 
   const [category, setCategory] = useState('')
 
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState(sessionStorage.getItem("user"))
 
   return (
     <categoryContext.Provider value={{category, setCategory}}>
       <UserContext.Provider value={{user, setUser}}>
-    
       <Header/>
       <section>
         <Routes>
