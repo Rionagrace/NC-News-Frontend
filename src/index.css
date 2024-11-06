@@ -1,4 +1,6 @@
-
+*{
+  margin: 1%
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -10,6 +12,8 @@ a:hover {
 
 h1{
   text-align: center;
+  font-size: 400%;
+  text-shadow: black 10px;
 }
 
 .catNav{
@@ -25,7 +29,8 @@ h1{
 }
 .highlightedcatButton{
   margin: 1%;
-  background-color: red;
+  background-color: rgb(157, 91, 207);
+  color: white;
 }
 
 .flexItem{

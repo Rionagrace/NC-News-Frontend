@@ -33,7 +33,7 @@ function Header() {
 					}
 				</nav>
 				<Link to={"/"} reloadDocument >
-					<h1>NC-NEWS</h1>
+					<h1>NORTHCODERS NEWS</h1>
 				</Link>
 				<nav className="catNav">
 					{categories.map((Acategory) => {

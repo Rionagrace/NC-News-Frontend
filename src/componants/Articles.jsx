@@ -65,17 +65,17 @@ if(error){
 		return (
 			<>
       <section className="searchParams">
-				<DropdownButton id="dropdown-basic-button" title="Sort by">
-					<Dropdown.Item onClick={(()=> {handleSortBySubmit("author")})}>author</Dropdown.Item>
-					<Dropdown.Item onClick={(()=> {handleSortBySubmit("topic")})}>topic</Dropdown.Item>
+				<DropdownButton id="dropdown-basic-button" title={sortBy === ''? "sort by" : "sort by: " +sortBy}>
+					<Dropdown.Item onClick={(()=> {handleSortBySubmit("author")})}>Author</Dropdown.Item>
+					<Dropdown.Item onClick={(()=> {handleSortBySubmit("topic")})}>Topic</Dropdown.Item>
 					<Dropdown.Item onClick={(()=> {handleSortBySubmit("title")})}>Title</Dropdown.Item>
           <Dropdown.Item onClick={(()=> {handleSortBySubmit("article_id")})}>Article ID</Dropdown.Item>
           <Dropdown.Item onClick={(()=> {handleSortBySubmit("created_at")})}>Created At</Dropdown.Item>
           <Dropdown.Item onClick={(()=> {handleSortBySubmit("votes")})}>Votes</Dropdown.Item>
           <Dropdown.Item onClick={(()=> {handleSortBySubmit("topic")})}>Comment Count</Dropdown.Item>
 				</DropdownButton>
-				<DropdownButton id="dropdown-basic-button" title="Sort direction">
-					<Dropdown.Item onClick={(()=> {handleOrderSubmit("asc")})}>ascending</Dropdown.Item>
+				<DropdownButton id="dropdown-basic-button" title={order === '' ? "order" : "order: " + order}>
+					<Dropdown.Item onClick={(()=> {handleOrderSubmit("asc")})}>Acscending</Dropdown.Item>
 					<Dropdown.Item onClick={(()=> {handleOrderSubmit("desc")})}>Descending</Dropdown.Item>
 				</DropdownButton>
         </section>
