@@ -16,6 +16,10 @@ h1{
   text-align: center;
 }
 
+.searchParams{
+  display: flex;
+}
+
 .catButton{
   margin: 1%;
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { updateVotes } from "../../api";
+import { updateCommentVotes, updateVotes } from "../../api";
 
 function Vote(props) {
 	const { article, comment } = props;
@@ -26,18 +26,30 @@ function Vote(props) {
       });
 		}
 
-		// if (comment) {
-		// 	updateVotes("comments", comment.comment_id, 1);
-		// }
+		if (comment) {
+			updateCommentVotes( comment.comment_id, 1)
+      .catch((err) => {
+        setLikesCount((currentLikesCount) => currentLikesCount - 1);
+        setError("Your like was not successful. Please try again!");
+      });
+		}
 	}
 	function handleDislike() {
 		setLikesCount((currentLikesCount) => currentLikesCount - 1);
 		if (article) {
-			updateVotes(article.article_id, -1);
+			updateVotes(article.article_id, -1)
+      .catch((err) => {
+        setLikesCount((currentLikesCount) => currentLikesCount - 1);
+        setError("Your like was not successful. Please try again!");
+      });
 		}
-		// if (comment) {
-		// 	updateVotes("comments", comment.comment_id, -1);
-		// }
+		if (comment) {
+			updateCommentVotes( comment.comment_id, -1)
+      .catch((err) => {
+        setLikesCount((currentLikesCount) => currentLikesCount - 1);
+        setError("Your like was not successful. Please try again!");
+      });
+		}
 	}
 
 	return (

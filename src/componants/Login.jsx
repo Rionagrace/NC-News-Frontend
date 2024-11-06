@@ -12,7 +12,16 @@ function Login (){
 
   function handleSubmit(event) {
     event.preventDefault();
-    setTestUser(event.target.username.value);
+    validateUser(event.target.username.value)
+    .then((result) => {
+      setUser(event.target.username.value);
+      sessionStorage.setItem("user", result.data.user.username)
+    })
+    .catch((error) => {
+      if (error.status === 401) {
+        alert("invalid user");
+      } else alert("hi");
+    });
   }
 
   const {setCategory} = useContext(categoryContext)
@@ -21,16 +30,20 @@ function Login (){
 
   useEffect(() => {
     setCategory("")
-    validateUser(testUser)
+    if(!user){
+      return
+    }
+    validateUser(user)
       .then((result) => {
-        setUser(testUser);
+        setUser(user);
+        sessionStorage.setItem("user", result.data.user.username)
       })
       .catch((error) => {
         if (error.status === 401) {
           alert("invalid user");
-        } else alert(error);
+        } else alert("hi");
       });
-  }, [testUser]);
+  }, [user]);
 
   if (user) {
     return (
