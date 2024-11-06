@@ -20,11 +20,12 @@ function Articles() {
   const [sortBy, setSortBy] = useState("");
   const [order, setOrder] = useState("")
   const [searchParams, setSearchParams] = useSearchParams();
+  const [error, setError] = useState('')
 
 	useEffect(() => {
     const searchObject = {}
 		if (topic) {
-			setCategory(topic);
+      setCategory(topic)
 		}
     if(sortBy !== ''){
       searchObject.sort_by = sortBy
@@ -36,8 +37,15 @@ function Articles() {
 			setArticles(results);
 			setLoaded(true);
       setSearchParams(searchObject)
-		});
-	}, [topic, sortBy, order]); 
+		})
+    .catch((error) => {
+      if(error){
+        setError('Page not found')
+      }
+      
+    });
+    
+	}, [topic, sortBy, order, error]); 
 
 
 
@@ -49,7 +57,9 @@ function Articles() {
     setOrder(param)
   }
 
-
+if(error){
+  return <h2>{error}</h2>
+}
 
 	if (loaded) {
 		return (

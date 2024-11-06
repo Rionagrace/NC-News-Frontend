@@ -7,6 +7,7 @@ import categoryContext from './contexts/categoryContexts';
 import Login from './componants/Login';
 import UserContext from './contexts/userContext';
 import Articles from './componants/Articles';
+import ErrorPage from './componants/ErrorPage';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/articles/:article_id" element={<Article/>}/>
           <Route path="/log-in" element={<Login/>}/>
           <Route path="/:topic" element={<Articles/>}/>
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </section>
     

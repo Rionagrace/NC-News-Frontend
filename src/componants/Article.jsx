@@ -11,6 +11,7 @@ function Article (){
   const {setCategory} = useContext(categoryContext)
   const [viewComments, setViewComments] = useState(false)
   const [loaded, setLoaded] = useState(false)
+  const [error, setError] = useState(false)
 
 
   function handleComments (){
@@ -27,8 +28,14 @@ function Article (){
       setCategory(results.topic)
       setLoaded(true)
     })
+    .catch((error) => {
+      setError(true)
+    })
   }, [])
 
+  if(error){
+    return (<h2>This article does not exist</h2>)
+    }
   if(loaded){
   return (
     <>
