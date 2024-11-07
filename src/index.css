@@ -3,21 +3,21 @@
 } */
 a {
 	font-weight: 500;
-	color: #2c1320;
+	color:#cecece;
 	text-decoration: inherit;
 }
 a:hover {
-	color: #5f4b66;
+	color:#2c1320
 }
 
-.header {
-	background-color: #cecece;
+.header { 
+	background-color:#5f4b66
 }
 
 .profilePic {
-	width: 5%;
+	width: 10%;
 	border-radius: 50%;
-	border: #2c1320 2px;
+	border: #2c1320 1px solid;
 }
 
 .loggedin {
@@ -28,6 +28,7 @@ a:hover {
 .profileInfo {
 	display: flex;
   justify-content: end;
+  align-items: center;
 }
 
 .logIn {
@@ -47,6 +48,10 @@ h1 {
 .searchParams {
 	display: flex;
 }
+
+.query {
+  margin: 1%;
+}
 #dropdown-basic-button {
 	background-color: #5f4b66;
 	border: #5f4b66;
@@ -56,18 +61,19 @@ h1 {
 .catButton {
 	margin: 1%;
 }
-.highlightedcatButton {
-	margin: 1%;
-	background-color: #5f4b66;
-	color: #d5ddff;
-}
-.highlightedcatButton:hover {
-	border-color: #2c1320;
-	color: #2c1320;
-}
+
 
 .flexItem {
 	margin: 2%;
+  background-color:#d5ddff;
+}
+.cardTitle{
+  background-color: #5f4b66;
+  color: #d5ddff;
+}
+
+.spotlightArticle{
+  background-color:#d5ddff;
 }
 
 .vote {
@@ -108,11 +114,10 @@ h1 {
   width: 100%;
   background-color: #5f4b66;
   color: #cecece;
+  padding-top: 1%;
 }
 
-.randomArticle {
-	grid-column: span 2;
-}
+
 .resultsFlex {
 	display: grid;
 	/* grid-template-columns: repeat(4, 1fr); */
@@ -120,6 +125,7 @@ h1 {
 }
 
 button {
+  background-color:#d5ddff;
 	border-radius: 8px;
 	border: 1px solid transparent;
 	padding: 0.6em 1.2em;
@@ -138,11 +144,34 @@ button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
 
+.highlightedcatButton {
+	margin: 1%;
+	background-color: #5f4b66;
+	color: #d5ddff;
+}
+.highlightedcatButton:hover {
+	border-color: #2c1320;
+	color: #2c1320;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 	.articleImage {
 		width: 100%;
 	}
+
+  .homePage{
+    margin: 5%;
+  }
+
+  .top5Articles {
+    margin: 5%;
+    background-color:#d5ddff;
+  }
+}
+
+.badge{
+  background: #5f4b66;
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -153,6 +182,29 @@ button:focus-visible {
 		float: left;
 		margin: 2%;
 	}
+  .homePage{
+    display: flex;
+    align-items: stretch;
+    flex-flow: row wrap;
+  }
+  
+  
+  
+  .top5Articles {
+    margin-top: 6%;
+    /* margin: 3%; */
+    width: 35%;
+    height: 50%;
+  }
+  
+  
+  .spotlightTitle{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 3%
+  }
+  
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

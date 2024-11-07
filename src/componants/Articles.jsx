@@ -65,7 +65,7 @@ if(error){
 		return (
 			<>
       <section className="searchParams">
-				<DropdownButton id="dropdown-basic-button" title={sortBy === ''? "sort by" : "sort by: " +sortBy}>
+				<DropdownButton className="query" id="dropdown-basic-button" title={sortBy === ''? "sort by" : "sort by: " +sortBy}>
 					<Dropdown.Item onClick={(()=> {handleSortBySubmit("author")})}>Author</Dropdown.Item>
 					<Dropdown.Item onClick={(()=> {handleSortBySubmit("topic")})}>Topic</Dropdown.Item>
 					<Dropdown.Item onClick={(()=> {handleSortBySubmit("title")})}>Title</Dropdown.Item>
@@ -74,7 +74,7 @@ if(error){
           <Dropdown.Item onClick={(()=> {handleSortBySubmit("votes")})}>Votes</Dropdown.Item>
           <Dropdown.Item onClick={(()=> {handleSortBySubmit("topic")})}>Comment Count</Dropdown.Item>
 				</DropdownButton>
-				<DropdownButton id="dropdown-basic-button" title={order === '' ? "order" : "order: " + order}>
+				<DropdownButton className="query"  id="dropdown-basic-button" title={order === '' ? "order" : "order: " + order}>
 					<Dropdown.Item onClick={(()=> {handleOrderSubmit("asc")})}>Acscending</Dropdown.Item>
 					<Dropdown.Item onClick={(()=> {handleOrderSubmit("desc")})}>Descending</Dropdown.Item>
 				</DropdownButton>

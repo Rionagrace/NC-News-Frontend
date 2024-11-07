@@ -70,7 +70,7 @@ function Header() {
 									key={Acategory.slug}
 									reloadDocument
 								>
-									<button className="highlightedcatButton">
+									<button >
 										{Acategory.slug}
 									</button>
 								</Link>
@@ -82,7 +82,7 @@ function Header() {
 								key={Acategory.slug}
 								reloadDocument
 							>
-								<button className="catButton">{Acategory.slug}</button>
+								<button className="highlightedcatButton">{Acategory.slug}</button>
 							</Link>
 						);
 					})}

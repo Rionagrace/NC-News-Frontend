@@ -8,7 +8,7 @@ const {article} = props
   return (
     <Link to={`/articles/${article.article_id}`}>
     <Card className="flexItem" >
-    <Card.Header>{article.title}</Card.Header>
+    <Card.Header className="cardTitle">{article.title}</Card.Header>
     <Card.Body>
       <Card.Text>Written by: {article.author}</Card.Text>
       <Card.Text>Topic: {article.topic}</Card.Text>

@@ -18,13 +18,13 @@ function Top5Articles() {
 
 
 	return (
-		<Card style={{ width: "35%" }}>
-			<Card.Header>Trending articles this week </Card.Header>
+		<Card className="top5Articles">
+			<Card.Header className="cardTitle">Trending articles this week </Card.Header>
 			<ListGroup variant="flush">
 				{sortedArticles.map((article, i)=> {
 					return (
-						<Link  key={article.article_id} to={`/articles/${article.article_id}`} ><ListGroup.Item>
-							{i +1}. {article.title} <Badge pill>
+						<Link  key={article.article_id} to={`/articles/${article.article_id}`} ><ListGroup.Item className="flexItem">
+							{i +1}. {article.title} <Badge className="badge" pill>
           Votes: {article.votes}
         </Badge>
 						</ListGroup.Item>
