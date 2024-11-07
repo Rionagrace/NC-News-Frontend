@@ -15,10 +15,10 @@ function App() {
 
   const [user, setUser] = useState(sessionStorage.getItem("user"))
 
-  return (
+  return (<section className='app'>
     <categoryContext.Provider value={{category, setCategory}}>
       <UserContext.Provider value={{user, setUser}}>
-      <Header/>
+      <Header />
       <section>
         <Routes>
           <Route path="/" element={<Home/>}/>
@@ -28,9 +28,11 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </section>
+      
     
     </UserContext.Provider>
     </categoryContext.Provider>
+    </section>
   )
 }
 

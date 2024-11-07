@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { getCategories } from "../../api";
+import { getCategories, validateUser } from "../../api";
 import { Link } from "react-router-dom";
 import categoryContext from "../contexts/categoryContexts";
 import UserContext from "../contexts/userContext";
@@ -8,11 +8,12 @@ import { useSearchParams } from "react-router-dom";
 function Header() {
 	const [categories, setCategories] = useState([]);
 	const [loaded, setLoaded] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	const { category } = useContext(categoryContext);
 
 	const { user, setUser } = useContext(UserContext);
+	const [profilePhoto, setProfilePhoto] = useState("");
 
 	useEffect(() => {
 		getCategories().then((results) => {
@@ -21,41 +22,69 @@ function Header() {
 		});
 	}, []);
 
+	useEffect(() => {
+		validateUser(user).then((results) => {
+			setProfilePhoto(results.data.user.avatar_url);
+		});
+	}, [user]);
+
 	if (loaded) {
 		return (
-			<>
+			<section className="header">
 				<nav>
-					{user ? <><Link to="/"><button onClick={()=> {setUser("") ; sessionStorage.clear()}}>log out</button></Link> <p>Logged in as: {user}</p></>
-					: 
+					{user ? (
+						<section className="loggedin">
+							<Link to="/">
+								<button
+									onClick={() => {
+										setUser("");
+										sessionStorage.clear();
+									}}
+								>
+									log out
+								</button>
+							</Link>{" "}
+							<section className="profileInfo">
+							<p>{user}</p>
+							<img className="profilePic" src={profilePhoto} />
+							</section>
+						</section>
+					) : (
 						<Link to={"/log-in"}>
 							<button>{"log in"}</button>
 						</Link>
-					}
+					)}
 				</nav>
-				<Link to={"/"} reloadDocument >
+				<Link to={"/"} reloadDocument>
 					<h1>NORTHCODERS NEWS</h1>
 				</Link>
 				<nav className="catNav">
 					{categories.map((Acategory) => {
 						if (category === Acategory.slug) {
 							return (
-                <Link to={`/${Acategory.slug}`} key={Acategory.slug} reloadDocument >
-								<button className="highlightedcatButton" >
-									{Acategory.slug}
-								</button>
-                </Link>
+								<Link
+									to={`/${Acategory.slug}`}
+									key={Acategory.slug}
+									reloadDocument
+								>
+									<button className="highlightedcatButton">
+										{Acategory.slug}
+									</button>
+								</Link>
 							);
 						}
 						return (
-              <Link to={`/${Acategory.slug}`} key={Acategory.slug} reloadDocument >
-							<button className="catButton" >
-								{Acategory.slug}
-							</button>
-              </Link>
+							<Link
+								to={`/${Acategory.slug}`}
+								key={Acategory.slug}
+								reloadDocument
+							>
+								<button className="catButton">{Acategory.slug}</button>
+							</Link>
 						);
 					})}
 				</nav>
-			</>
+			</section>
 		);
 	} else return <h2>Loading...</h2>;
 }

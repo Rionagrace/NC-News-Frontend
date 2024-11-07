@@ -47,14 +47,16 @@ function Login (){
 
   if (user) {
     return (
-      <>
+      <><section className="logIn">
         <h2>Welcome back, {user}!</h2>
+        </section>
       </>
     );
   }
   if (!user)
   return (
     <>
+    <section className="logIn">
       <form
         onSubmit={handleSubmit}
         action=""
@@ -66,6 +68,7 @@ function Login (){
         <input id="username" type="text"></input>
         <button type="submit">Log In</button>
       </form>
+      </section>
     </>
   );
 }
