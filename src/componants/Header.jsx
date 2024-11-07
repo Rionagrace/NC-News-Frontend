@@ -17,15 +17,18 @@ function Header() {
 
 	useEffect(() => {
 		getCategories().then((results) => {
+			results.push({slug: "all articles"})
 			setCategories(results);
 			setLoaded(true);
 		});
 	}, []);
 
 	useEffect(() => {
+		if(user){
 		validateUser(user).then((results) => {
 			setProfilePhoto(results.data.user.avatar_url);
-		});
+		})
+	};
 	}, [user]);
 
 	if (loaded) {
