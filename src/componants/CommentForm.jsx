@@ -61,7 +61,7 @@ useEffect(() => {
 <input id="commentBody" type="text" required></input>
 <button disabled={buttonDisabled} type="submit">Post</button>
     </form>
-    {posting ? <p>Posting...</p> : null}
+    {posting ? <div class="loader"></div> : null}
     {loaded ? <CommentCard comment={loadedComment} setCommentDeleted={setCommentDeleted}/> : null}
     {error ? <p>{error}</p> : null}
     </>

@@ -62,7 +62,7 @@ function Article() {
 			</>
 		);
 	}
-	if (!loaded) return <p>Loading....</p>;
+	if (!loaded) return <div class="loader"></div>
 }
 
 export default Article;

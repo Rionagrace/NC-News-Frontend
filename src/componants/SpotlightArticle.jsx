@@ -7,7 +7,10 @@ function SpotlightArticle (){
 
   const [randomArticle, setRandomArticle] = useState({})
 
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
+    setLoading(true)
     getArticles()
     .then((results) =>{
      return getRandomArticleId(results)
@@ -17,10 +20,15 @@ function SpotlightArticle (){
     })
     .then((article) => {
       setRandomArticle(article)
+      setLoading(false)
     })
     
   }, [])
 
+  if(loading){
+    return <div class="loader"></div>
+  }
+else
   return (
     <section className='spotlightTitle'>
     <h2>Spotlight on:</h2>

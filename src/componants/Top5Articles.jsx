@@ -24,7 +24,7 @@ function Top5Articles() {
 				{sortedArticles.map((article, i)=> {
 					return (
 						<Link  key={article.article_id} to={`/articles/${article.article_id}`} ><ListGroup.Item className="flexItem">
-							{i +1}. {article.title} <Badge className="badge" pill>
+							{i +1}. {article.title} <Badge bg="" className="badge" pill>
           Votes: {article.votes}
         </Badge>
 						</ListGroup.Item>

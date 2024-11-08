@@ -86,7 +86,7 @@ if(error){
 				</section>
 			</>
 		);
-	} else return <p>Loading...</p>;
+	} else return <div class="loader"></div>
 }
 
 export default Articles;
