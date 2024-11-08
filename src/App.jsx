@@ -8,6 +8,7 @@ import Login from './componants/Login';
 import UserContext from './contexts/userContext';
 import Articles from './componants/Articles';
 import ErrorPage from './componants/ErrorPage';
+import PostArticle from './componants/PostArticle';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/log-in" element={<Login/>}/>
           <Route path="/:topic" element={<Articles/>}/>
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/post-article" element={<PostArticle/>}/>
         </Routes>
       </section>
       

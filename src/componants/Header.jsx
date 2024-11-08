@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import categoryContext from "../contexts/categoryContexts";
 import UserContext from "../contexts/userContext";
 import { useSearchParams } from "react-router-dom";
+import SearchBar from "./searchBar";
 
 function Header() {
 	const [categories, setCategories] = useState([]);
@@ -17,18 +18,18 @@ function Header() {
 
 	useEffect(() => {
 		getCategories().then((results) => {
-			results.push({slug: "articles"})
+			results.push({ slug: "articles" });
 			setCategories(results);
 			setLoaded(true);
 		});
 	}, []);
 
 	useEffect(() => {
-		if(user){
-		validateUser(user).then((results) => {
-			setProfilePhoto(results.data.user.avatar_url);
-		})
-	};
+		if (user) {
+			validateUser(user).then((results) => {
+				setProfilePhoto(results.data.user.avatar_url);
+			});
+		}
 	}, [user]);
 
 	if (loaded) {
@@ -48,8 +49,12 @@ function Header() {
 								</button>
 							</Link>{" "}
 							<section className="profileInfo">
-							<p >Welcome back {user}</p>
-							<img className="profilePic" src={profilePhoto} alt="user's profile photo" />
+								<p>Welcome back {user}</p>
+								<img
+									className="profilePic"
+									src={profilePhoto}
+									alt="user's profile photo"
+								/>
 							</section>
 						</section>
 					) : (
@@ -61,6 +66,7 @@ function Header() {
 				<Link to={"/"} reloadDocument>
 					<h1>NORTHCODERS NEWS</h1>
 				</Link>
+
 				<nav className="catNav">
 					{categories.map((Acategory) => {
 						if (category === Acategory.slug) {
@@ -70,9 +76,7 @@ function Header() {
 									key={Acategory.slug}
 									reloadDocument
 								>
-									<button >
-										{Acategory.slug}
-									</button>
+									<button>{Acategory.slug}</button>
 								</Link>
 							);
 						}
@@ -82,14 +86,17 @@ function Header() {
 								key={Acategory.slug}
 								reloadDocument
 							>
-								<button className="highlightedcatButton">{Acategory.slug}</button>
+								<button className="highlightedcatButton">
+									{Acategory.slug}
+								</button>
 							</Link>
 						);
 					})}
+					<Link to={"/post-article"}><button>post article</button></Link>
 				</nav>
 			</section>
 		);
-	} else return <div className="loader"></div>
+	} else return <div className="loader"></div>;
 }
 
 export default Header;
