@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById } from "../../api";
+import { deleteArticle, getArticleById } from "../../api";
 import categoryContext from "../contexts/categoryContexts";
 import Comments from "./Comments";
 import Vote from "./Vote";
 import ErrorPage from "./ErrorPage";
+import UserContext from "../contexts/userContext";
+
 
 function Article() {
 	const { article_id } = useParams();
@@ -13,12 +15,35 @@ function Article() {
 	const [viewComments, setViewComments] = useState(false);
 	const [loaded, setLoaded] = useState(false);
 	const [error, setError] = useState({});
+  const {user} = useContext(UserContext)
+  const [articleId, setArticleId] = useState(null)
+  const [articleDeleted, setArticleDeleted] = useState(false)
 
 	function handleComments() {
 		if (viewComments) {
 			setViewComments(false);
 		} else setViewComments(true);
 	}
+
+  function handleDelete (event){
+    event.preventDefault();
+    setArticleId(article.article_id)
+    setLoaded(false);  
+  }
+
+  useEffect(() => {
+    if(articleId){
+      deleteArticle(articleId)
+      .then(() => {
+        setLoaded(true); 
+        setArticleDeleted(true)
+      })
+      .catch((err) => {
+        setError(err);
+        setLoaded(true);
+      })
+    }
+  }, [articleId])
 
 	useEffect(() => {
 		getArticleById(article_id)
@@ -30,12 +55,17 @@ function Article() {
 			.catch((error) => {
 				setError(error);
 			});
-	}, []);
+	}, [article_id]);
 
 	if (error.status) {
 		return <ErrorPage error={error}/>;
 	}
-	if (loaded) {
+
+  if(articleDeleted){
+    return <h2>This article has been deleted</h2>
+  }
+
+	if (!articleDeleted && loaded) {
 		return (
 			<>
 				<section className="articlePage">
@@ -57,6 +87,7 @@ function Article() {
 								? "hide comments"
 								: `View Comments:  ${article.comment_count}`}
 						</button>
+            {article.author === user ? <button onClick={handleDelete}>Delete article</button> : null}
 					</section>
           </section>
 				{viewComments ? <Comments article_id={article.article_id} /> : null}

@@ -3,11 +3,13 @@ import UserContext from "../contexts/userContext";
 import { Link, redirect } from "react-router-dom";
 import { postArticle } from "../../api";
 import Login from "./Login";
+import categoryContext from "../contexts/categoryContexts";
 
 
 
 function PostArticle() {
 	const { user } = useContext(UserContext);
+  const {category, setCategory} = useContext(categoryContext)
   const [article, setArticle] = useState({})
   const [postedArticle, setPostedArticle] = useState({})
 
@@ -23,6 +25,7 @@ function PostArticle() {
   }
 
   useEffect(() => {
+    setCategory("post article")
     if(article.title){
     postArticle(article)
     .then((result) => {

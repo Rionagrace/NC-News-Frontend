@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { getCategories, validateUser } from "../../api";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import categoryContext from "../contexts/categoryContexts";
 import UserContext from "../contexts/userContext";
 import { useSearchParams } from "react-router-dom";
@@ -19,6 +19,8 @@ function Header() {
 	useEffect(() => {
 		getCategories().then((results) => {
 			results.push({ slug: "articles" });
+			results.push({ slug: "post article" });
+			// results.push({ slug: "post-article" });
 			setCategories(results);
 			setLoaded(true);
 		});
@@ -69,30 +71,20 @@ function Header() {
 
 				<nav className="catNav">
 					{categories.map((Acategory) => {
-						if (category === Acategory.slug) {
-							return (
-								<Link
-									to={`/${Acategory.slug}`}
-									key={Acategory.slug}
-									reloadDocument
-								>
-									<button>{Acategory.slug}</button>
-								</Link>
-							);
-						}
+						const isPostArticle = Acategory.slug === "post article";
+						const isSelected = category === Acategory.slug;
+						const linkPath = isPostArticle
+							? "/post-article"
+							: `/${Acategory.slug}`;
+
 						return (
-							<Link
-								to={`/${Acategory.slug}`}
-								key={Acategory.slug}
-								reloadDocument
-							>
-								<button className="highlightedcatButton">
+							<Link to={linkPath} key={Acategory.slug} reloadDocument>
+								<button className={isSelected ? "" : "highlightedcatButton"}>
 									{Acategory.slug}
 								</button>
 							</Link>
 						);
 					})}
-					<Link to={"/post-article"}><button>post article</button></Link>
 				</nav>
 			</section>
 		);

@@ -127,6 +127,9 @@ h1 {
 
 .catNav {
 	text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
 }
 
 .searchParams {
@@ -141,10 +144,10 @@ h1 {
 	border: #5f4b66;
 	color: #d5ddff;
 }
-
+/* 
 .catButton {
-	margin: 1%;
-}
+	
+} */
 
 
 .flexItem {
@@ -230,7 +233,6 @@ button:focus-visible {
 }
 
 .highlightedcatButton {
-	margin: 1%;
 	background-color: #5f4b66;
 	color: #d5ddff;
 }
