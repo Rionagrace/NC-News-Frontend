@@ -6,7 +6,11 @@ function Vote(props) {
 	const { article, comment } = props;
 
 	const [likesCount, setLikesCount] = useState(0);
-  const [error, setError] = useState('')
+	const [error, setError] = useState("");
+	const itemId = article ? article.article_id : comment.comment_id;
+	const itemType = article ? "article" : "comment";
+
+	const [itemVoted, setItemVoted] = useState(Boolean(sessionStorage.getItem(`${itemType}Voted_${itemId}`)))
 
 	useEffect(() => {
 		if (article) {
@@ -17,48 +21,33 @@ function Vote(props) {
 		}
 	}, []);
 
-	function handleLike() {
-		setLikesCount((currentLikesCount) => currentLikesCount + 1);
-		if (article) {
-			updateVotes(article.article_id, 1)
-      .catch((err) => {
-        setLikesCount((currentLikesCount) => currentLikesCount - 1);
-        setError(err);
-      });
-		}
+	function handleVote(voteChange) {
+		setLikesCount((currentLikesCount) => currentLikesCount + voteChange);
+		setItemVoted(true)
+		const updateVoteFn = article ? updateVotes : updateCommentVotes;
+		updateVoteFn(itemId, voteChange)
+			.then(() => {
+				sessionStorage.setItem(`${itemType}Voted_${itemId}`, true);
+			})
+			.catch((err) => {
+				setLikesCount((currentLikesCount) => currentLikesCount - voteChange);
+				setError("Your vote was not successful. Please try again!");
+				setItemVoted(false)
+			});
+	}
 
-		if (comment) {
-			updateCommentVotes( comment.comment_id, 1)
-      .catch((err) => {
-        setLikesCount((currentLikesCount) => currentLikesCount - 1);
-        setError(err);
-      });
-		}
-	}
-	function handleDislike() {
-		setLikesCount((currentLikesCount) => currentLikesCount - 1);
-		if (article) {
-			updateVotes(article.article_id, -1)
-      .catch((err) => {
-        setLikesCount((currentLikesCount) => currentLikesCount - 1);
-        setError("Your like was not successful. Please try again!");
-      });
-		}
-		if (comment) {
-			updateCommentVotes( comment.comment_id, -1)
-      .catch((err) => {
-        setLikesCount((currentLikesCount) => currentLikesCount - 1);
-        setError("Your like was not successful. Please try again!");
-      });
-		}
-	}
+	
 
 	return (
 		<section className="vote">
-			<button onClick={handleLike}>+</button>
-			<button onClick={handleDislike}>-</button>
+			<button disabled={itemVoted} onClick={(() => {handleVote(1)})}>
+				+
+			</button>
+			<button disabled={itemVoted} onClick={(() => {handleVote(-1)})}>
+				-
+			</button>
 			<p>{likesCount}</p>
-      {error ? <ErrorPage error={error}/> : null}
+			{error ? <ErrorPage error={error} /> : null}
 		</section>
 	);
 }

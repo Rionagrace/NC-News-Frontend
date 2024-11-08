@@ -13,7 +13,7 @@ const {article} = props
       <Card.Text>Written by: {article.author}</Card.Text>
       <Card.Text>Topic: {article.topic}</Card.Text>
     </Card.Body>
-    <Card.Img variant="bottom" src={article.article_img_url} />
+    <Card.Img variant="bottom" src={article.article_img_url} alt={article.title} />
   </Card>
   </Link>
   )

@@ -3,6 +3,7 @@ import Articles from "./Articles"
 import categoryContext from "../contexts/categoryContexts"
 import Top5Articles from "./Top5Articles"
 import SpotlightArticle from "./SpotlightArticle"
+import TickerTape from "./TickerTape"
 
 function Home (){
 
@@ -13,10 +14,13 @@ function Home (){
   })
 
   return (
+    <>
+    <TickerTape/>
     <section className="homePage">
     <SpotlightArticle/>
     <Top5Articles/>
     </section>
+    </>
   )
 }
 

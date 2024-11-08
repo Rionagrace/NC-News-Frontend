@@ -9,7 +9,7 @@ export function getCategories() {
 }
 
 export function getArticles(category, sort_by, order) {
-	if (category === "all articles") {
+	if (category === "articles") {
 		category = undefined;
 	}
 	return axios

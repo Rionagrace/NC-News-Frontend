@@ -17,7 +17,7 @@ function Header() {
 
 	useEffect(() => {
 		getCategories().then((results) => {
-			results.push({slug: "all articles"})
+			results.push({slug: "articles"})
 			setCategories(results);
 			setLoaded(true);
 		});
@@ -48,8 +48,8 @@ function Header() {
 								</button>
 							</Link>{" "}
 							<section className="profileInfo">
-							<p>{user}</p>
-							<img className="profilePic" src={profilePhoto} />
+							<p >Welcome back {user}</p>
+							<img className="profilePic" src={profilePhoto} alt="user's profile photo" />
 							</section>
 						</section>
 					) : (

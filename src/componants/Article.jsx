@@ -47,7 +47,7 @@ function Article() {
           <p>Written by: {article.author}</p>
           </section>
 					<section className="articleContents">
-						<img className="articleImage" src={article.article_img_url} />
+						<img className="articleImage" alt={article.title} src={article.article_img_url} />
 						<p className="articleBody">{article.body}</p>
 					</section>
 					<section className="articleButtons">

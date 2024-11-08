@@ -12,7 +12,7 @@ function Top5Articles() {
   const [error, setError] = useState({})
 
 	useEffect(() => {
-		getArticles("all articles", "votes", "desc").then((results) => {
+		getArticles("articles", "votes", "desc").then((results) => {
 			const slicedResults = results.slice(0, 5);
 			setSortedArticles(slicedResults);
 		})

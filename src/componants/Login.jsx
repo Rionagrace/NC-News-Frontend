@@ -43,7 +43,7 @@ function Login (){
       .catch((error) => {
         if (error.status === 401) {
           alert("invalid user");
-        } else alert("hi");
+        } else setError(error);
       });
   }, [user]);
 
