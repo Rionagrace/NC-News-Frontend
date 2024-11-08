@@ -3,20 +3,30 @@ import { getArticles } from "../../api";
 import Card from "react-bootstrap/Card";
 import { Badge, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import ErrorPage from "./ErrorPage";
 Badge
 
 
 function Top5Articles() {
 	const [sortedArticles, setSortedArticles] = useState([]);
+  const [error, setError] = useState({})
 
 	useEffect(() => {
 		getArticles("all articles", "votes", "desc").then((results) => {
 			const slicedResults = results.slice(0, 5);
 			setSortedArticles(slicedResults);
-		});
+		})
+    .catch((error) => {
+      if(error){
+        setError(error)
+      }
+
+    })
 	}, []);
 
-
+if(error.status){
+  return <ErrorPage error={error}/>
+}
 	return (
 		<Card className="top5Articles">
 			<Card.Header className="cardTitle">Trending articles this week </Card.Header>

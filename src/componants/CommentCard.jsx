@@ -3,6 +3,7 @@ import Vote from "./Vote"
 import { useContext, useEffect, useState } from "react"
 import UserContext from "../contexts/userContext"
 import { deleteComment } from "../../api"
+import ErrorPage from "./ErrorPage"
 
 function CommentCard (props) {
 
@@ -11,7 +12,7 @@ function CommentCard (props) {
   const [commentId, setCommentId] = useState(null)
   const [loaded, setLoaded] = useState(false)
   const [deleted, setDeleted] = useState(false)
-  const [error, setError] = useState('')
+  const [error, setError] = useState({})
   const {setCommentDeleted} = props
 
   function handleDelete (event){
@@ -26,7 +27,7 @@ function CommentCard (props) {
       setDeleted(true)
       deleteComment(commentId)
       .catch((err) => {
-        setError("Your comment was not successful. Please try again!");
+        setError(err);
       })
     }
   }, [commentId])
@@ -34,8 +35,8 @@ function CommentCard (props) {
 if(deleted){
   return <p>Comment has been deleted</p>
 }
-if(error)
-  {return <p>{error}</p>}
+if(error.status)
+{return <ErrorPage error={err}/>}
 
 
 else

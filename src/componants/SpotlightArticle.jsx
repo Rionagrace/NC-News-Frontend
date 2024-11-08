@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { getArticleById, getArticles, getRandomArticleId } from '../../api';
 import { Card } from 'react-bootstrap';
+import ErrorPage from './ErrorPage';
 
 function SpotlightArticle (){
 
   const [randomArticle, setRandomArticle] = useState({})
 
   const [loading, setLoading] = useState(false)
+
+  const [error, setError] = useState({})
 
   useEffect(() => {
     setLoading(true)
@@ -22,11 +25,18 @@ function SpotlightArticle (){
       setRandomArticle(article)
       setLoading(false)
     })
+    .catch((error) => {
+      setError(error)
+    })
     
   }, [])
 
+  if(error.status){
+    return <ErrorPage error={error}/>
+  }
+
   if(loading){
-    return <div class="loader"></div>
+    return <div className="loader"></div>
   }
 else
   return (

@@ -10,75 +10,138 @@ import * as React from "react";
 
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-
+import ErrorPage from "./ErrorPage";
 
 function Articles() {
 	const [articles, setArticles] = useState([]);
 	const { topic } = useParams();
 	const [loaded, setLoaded] = useState(false);
 	const { setCategory } = useContext(categoryContext);
-  const [sortBy, setSortBy] = useState("");
-  const [order, setOrder] = useState("")
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [error, setError] = useState('')
+	const [sortBy, setSortBy] = useState("");
+	const [order, setOrder] = useState("");
+	const [searchParams, setSearchParams] = useSearchParams();
+	const [error, setError] = useState({});
 
 	useEffect(() => {
-    const searchObject = {}
+		const searchObject = {};
 		if (topic) {
-      setCategory(topic)
+			setCategory(topic);
 		}
-    if(sortBy !== ''){
-      searchObject.sort_by = sortBy
-    }
-    if(order !== ''){
-      searchObject.order = order
-    }
-		getArticles(topic, sortBy === '' ? undefined : sortBy, order === '' ? undefined : order).then((results) => {
-			setArticles(results);
-			setLoaded(true);
-      setSearchParams(searchObject)
-		})
-    .catch((error) => {
-      if(error){
-        setError('Page not found')
-      }
-      
-    });
-    
-	}, [topic, sortBy, order, error]); 
+		if (sortBy !== "") {
+			searchObject.sort_by = sortBy;
+		}
+		if (order !== "") {
+			searchObject.order = order;
+		}
+		getArticles(
+			topic,
+			sortBy === "" ? undefined : sortBy,
+			order === "" ? undefined : order
+		)
+			.then((results) => {
+				setArticles(results);
+				setLoaded(true);
+				setSearchParams(searchObject);
+			})
+			.catch((error) => {
+				if (error.status) {
+					setError(error);
+				}
+			});
+	}, [topic, sortBy, order]);
 
+	function handleSortBySubmit(param) {
+		setSortBy(param);
+	}
 
+	function handleOrderSubmit(param) {
+		setOrder(param);
+	}
 
-  function handleSortBySubmit(param) {
-    setSortBy(param)
-  }
-
-  function handleOrderSubmit(param){
-    setOrder(param)
-  }
-
-if(error){
-  return <h2>{error}</h2>
-}
+	if (error.status) {
+		return <ErrorPage error={error} />;
+	}
 
 	if (loaded) {
 		return (
 			<>
-      <section className="searchParams">
-				<DropdownButton className="query" id="dropdown-basic-button" title={sortBy === ''? "sort by" : "sort by: " +sortBy}>
-					<Dropdown.Item onClick={(()=> {handleSortBySubmit("author")})}>Author</Dropdown.Item>
-					<Dropdown.Item onClick={(()=> {handleSortBySubmit("topic")})}>Topic</Dropdown.Item>
-					<Dropdown.Item onClick={(()=> {handleSortBySubmit("title")})}>Title</Dropdown.Item>
-          <Dropdown.Item onClick={(()=> {handleSortBySubmit("article_id")})}>Article ID</Dropdown.Item>
-          <Dropdown.Item onClick={(()=> {handleSortBySubmit("created_at")})}>Created At</Dropdown.Item>
-          <Dropdown.Item onClick={(()=> {handleSortBySubmit("votes")})}>Votes</Dropdown.Item>
-          <Dropdown.Item onClick={(()=> {handleSortBySubmit("topic")})}>Comment Count</Dropdown.Item>
-				</DropdownButton>
-				<DropdownButton className="query"  id="dropdown-basic-button" title={order === '' ? "order" : "order: " + order}>
-					<Dropdown.Item onClick={(()=> {handleOrderSubmit("asc")})}>Acscending</Dropdown.Item>
-					<Dropdown.Item onClick={(()=> {handleOrderSubmit("desc")})}>Descending</Dropdown.Item>
-				</DropdownButton>
-        </section>
+				<section className="searchParams">
+					<DropdownButton
+						className="query"
+						id="dropdown-basic-button"
+						title={sortBy === "" ? "sort by" : "sort by: " + sortBy}
+					>
+						<Dropdown.Item
+							onClick={() => {
+								handleSortBySubmit("author");
+							}}
+						>
+							Author
+						</Dropdown.Item>
+						<Dropdown.Item
+							onClick={() => {
+								handleSortBySubmit("topic");
+							}}
+						>
+							Topic
+						</Dropdown.Item>
+						<Dropdown.Item
+							onClick={() => {
+								handleSortBySubmit("title");
+							}}
+						>
+							Title
+						</Dropdown.Item>
+						<Dropdown.Item
+							onClick={() => {
+								handleSortBySubmit("article_id");
+							}}
+						>
+							Article ID
+						</Dropdown.Item>
+						<Dropdown.Item
+							onClick={() => {
+								handleSortBySubmit("created_at");
+							}}
+						>
+							Created At
+						</Dropdown.Item>
+						<Dropdown.Item
+							onClick={() => {
+								handleSortBySubmit("votes");
+							}}
+						>
+							Votes
+						</Dropdown.Item>
+						<Dropdown.Item
+							onClick={() => {
+								handleSortBySubmit("topic");
+							}}
+						>
+							Comment Count
+						</Dropdown.Item>
+					</DropdownButton>
+					<DropdownButton
+						className="query"
+						id="dropdown-basic-button"
+						title={order === "" ? "order" : "order: " + order}
+					>
+						<Dropdown.Item
+							onClick={() => {
+								handleOrderSubmit("asc");
+							}}
+						>
+							Acscending
+						</Dropdown.Item>
+						<Dropdown.Item
+							onClick={() => {
+								handleOrderSubmit("desc");
+							}}
+						>
+							Descending
+						</Dropdown.Item>
+					</DropdownButton>
+				</section>
 				<section className="resultsFlex">
 					{articles.map((article) => {
 						return <ArticleCard article={article} key={article.article_id} />;
@@ -86,7 +149,7 @@ if(error){
 				</section>
 			</>
 		);
-	} else return <div class="loader"></div>
+	} else return <div className="loader"></div>;
 }
 
 export default Articles;

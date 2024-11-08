@@ -89,7 +89,7 @@ function Header() {
 				</nav>
 			</section>
 		);
-	} else return <div class="loader"></div>
+	} else return <div className="loader"></div>
 }
 
 export default Header;

@@ -3,6 +3,7 @@ import UserContext from "../contexts/userContext";
 import { useParams } from "react-router-dom";
 import { postComment } from "../../api";
 import CommentCard from "./CommentCard";
+import ErrorPage from "./ErrorPage";
 
 function CommentForm (){
 
@@ -11,7 +12,7 @@ function CommentForm (){
   const [comment, setComment] = useState({})
   const [loaded, setLoaded] = useState(false);
   const [loadedComment, setLoadedComment] = useState({})
-  const [error, setError] = useState('')
+  const [error, setError] = useState({})
   const [buttonDisabled, setButtonDisabled] = useState(false)
   const [commentDeleted, setCommentDeleted] = useState(false)
   const [posting, setPosting] = useState(false)
@@ -38,7 +39,7 @@ useEffect(() => {
     })
     .catch((err) => {
       setLoadedComment({});
-      setError("Your comment was not successful. Please try again!");
+      setError(err);
     })
   }
 }, [comment]);
@@ -61,9 +62,9 @@ useEffect(() => {
 <input id="commentBody" type="text" required></input>
 <button disabled={buttonDisabled} type="submit">Post</button>
     </form>
-    {posting ? <div class="loader"></div> : null}
+    {posting ? <div className="loader"></div> : null}
     {loaded ? <CommentCard comment={loadedComment} setCommentDeleted={setCommentDeleted}/> : null}
-    {error ? <p>{error}</p> : null}
+    {error.status ? <ErrorPage error={error}/> : null}
     </>
   )
 }

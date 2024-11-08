@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { updateCommentVotes, updateVotes } from "../../api";
+import ErrorPage from "./ErrorPage";
 
 function Vote(props) {
 	const { article, comment } = props;
@@ -22,7 +23,7 @@ function Vote(props) {
 			updateVotes(article.article_id, 1)
       .catch((err) => {
         setLikesCount((currentLikesCount) => currentLikesCount - 1);
-        setError("Your like was not successful. Please try again!");
+        setError(err);
       });
 		}
 
@@ -30,7 +31,7 @@ function Vote(props) {
 			updateCommentVotes( comment.comment_id, 1)
       .catch((err) => {
         setLikesCount((currentLikesCount) => currentLikesCount - 1);
-        setError("Your like was not successful. Please try again!");
+        setError(err);
       });
 		}
 	}
@@ -57,7 +58,7 @@ function Vote(props) {
 			<button onClick={handleLike}>+</button>
 			<button onClick={handleDislike}>-</button>
 			<p>{likesCount}</p>
-      {error ? <p>{error}</p> : null}
+      {error ? <ErrorPage error={error}/> : null}
 		</section>
 	);
 }

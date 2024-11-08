@@ -4,11 +4,13 @@ import { useContext, useEffect, useState } from "react";
 import { validateUser } from "../../api";
 import UserContext from "../contexts/userContext";
 import categoryContext from "../contexts/categoryContexts";
+import ErrorPage from "./ErrorPage";
 
 function Login (){
 
   const [testUser, setTestUser] = useState("");
   const { user, setUser } = useContext(UserContext);
+  const [error, setError] = useState({})
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -20,7 +22,7 @@ function Login (){
     .catch((error) => {
       if (error.status === 401) {
         alert("invalid user");
-      } else alert("hi");
+      } else setError(error)
     });
   }
 
@@ -44,6 +46,10 @@ function Login (){
         } else alert("hi");
       });
   }, [user]);
+
+  if(error.status){
+    return <ErrorPage error={error}/>
+  }
 
   if (user) {
     return (

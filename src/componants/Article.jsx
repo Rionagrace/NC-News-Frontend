@@ -4,6 +4,7 @@ import { getArticleById } from "../../api";
 import categoryContext from "../contexts/categoryContexts";
 import Comments from "./Comments";
 import Vote from "./Vote";
+import ErrorPage from "./ErrorPage";
 
 function Article() {
 	const { article_id } = useParams();
@@ -11,7 +12,7 @@ function Article() {
 	const { setCategory } = useContext(categoryContext);
 	const [viewComments, setViewComments] = useState(false);
 	const [loaded, setLoaded] = useState(false);
-	const [error, setError] = useState(false);
+	const [error, setError] = useState({});
 
 	function handleComments() {
 		if (viewComments) {
@@ -27,12 +28,12 @@ function Article() {
 				setLoaded(true);
 			})
 			.catch((error) => {
-				setError(true);
+				setError(error);
 			});
 	}, []);
 
-	if (error) {
-		return <h2>This article does not exist</h2>;
+	if (error.status) {
+		return <ErrorPage error={error}/>;
 	}
 	if (loaded) {
 		return (
@@ -62,7 +63,7 @@ function Article() {
 			</>
 		);
 	}
-	if (!loaded) return <div class="loader"></div>
+	if (!loaded) return <div className="loader"></div>
 }
 
 export default Article;

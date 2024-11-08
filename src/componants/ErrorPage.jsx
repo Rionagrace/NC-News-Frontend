@@ -1,5 +1,14 @@
-function ErrorPage (){
-return <h2>This page does not exist</h2>
+function ErrorPage (props){
+const {error} = props
+
+console.log(error)
+
+return (
+  <section className="error">
+  <h2>{error.status} </h2>
+  <p>{error.response.data.msg}</p>
+  </section>
+)
 }
 
 

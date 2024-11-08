@@ -11,11 +11,14 @@ function Comments (props){
   const {user} = useContext(UserContext)
 
   const [comments, setComments] = useState([])
+  const [loading, setLoading] = useState(false)
   const {article_id} = props
   useEffect(()=> {
+    setLoading(true)
     getCommentsByArticleId(article_id)
     .then((results) => {
       setComments(results)
+      setLoading(false)
     })
   }, [])
 
@@ -24,10 +27,13 @@ function Comments (props){
 return (
   <>
   {user ? <CommentForm/> : <><h2>Log in to have your say:</h2><Login/></>}
-  <h2>Comments:</h2>
+  {loading ? <div className="loader"></div> : <><h2>Comments:</h2>
   {comments.map((comment) =>{
     return <CommentCard key={comment.comment_id} comment={comment}/>
   })}
+  </>
+  }
+  
   </>
 )
 }
