@@ -119,6 +119,12 @@ a:hover {
   text-align: center;
 }
 
+.submit{
+
+  text-align: center;
+  margin: 5%;
+}
+
 h1 {
 	text-align: center;
 	font-size: 300%;
@@ -193,6 +199,17 @@ h1 {
 
 .articleViewComments {
 	margin: 5%;
+}
+
+.comment{
+  margin:2%;
+  padding: 2%;
+  text-align: start;
+}
+
+.commentForm{
+  text-align: center;
+  margin: 5%;
 }
 
 .byLine{

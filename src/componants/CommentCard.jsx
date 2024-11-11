@@ -40,13 +40,15 @@ if(error.status)
 
 
 else
-  return <Card>
+  return <Card className="comment">
     <Card.Title>{comment.author}</Card.Title>
     <Card.Body>
       <Card.Text>{comment.body}</Card.Text>
       <Card.Text>{comment.created_at}</Card.Text>
+      <section className="articleButtons">
       <Vote comment={comment}/>
       {comment.author === user ? <button onClick={handleDelete}>Delete comment</button> : null}
+      </section>
       </Card.Body>
   </Card>
 

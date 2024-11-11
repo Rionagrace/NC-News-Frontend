@@ -45,7 +45,7 @@ function PostArticle() {
 
 	if (user) {
 		return (
-			<>
+			<section className="submit">
 				<form
 					onSubmit={handleSubmit}
 					action=""
@@ -56,8 +56,8 @@ function PostArticle() {
 					<label htmlFor="title">Title:</label>
 					<input id="title" type="text" required></input>
 					<br />
-					<label htmlFor="body">Body:</label>
-					<input id="body" type="text" required></input>
+					<label htmlFor="body" >Body:</label>
+					<input id="body" type="text" size="20" required></input>
 					<br></br>
 					
 					<label htmlFor="itemCategory">Category:</label>
@@ -68,9 +68,9 @@ function PostArticle() {
 					</select>
 					<br></br>
 					<br />
-					<button type="submit">List your item!</button>
+					<button type="submit">Post your article!</button>
 				</form>
-			</>
+			</section>
 		);
 	}
   
