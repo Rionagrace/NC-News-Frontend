@@ -2,11 +2,11 @@ Link to hosted site: https://nc-news-rm.netlify.app/
 
 NC-News is a website mimicking the functionality of a news website. 
 Users can:
-*View and vote on articles
-*Log in as a user
-*Post comments
-*Post their own articles
-*Delete their own articles/comments 
+* View and vote on articles
+* Log in as a user
+* Post comments
+* Post their own articles
+* Delete their own articles/comments 
 On the home page viewers can see the top 5 trending articles, as well as a new spotlight article per visit. 
 
 This is a full stack project, a link to the back end repo can be found here: https://github.com/Rionagrace/be-nc-news
