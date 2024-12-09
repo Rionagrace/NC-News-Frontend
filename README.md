@@ -1,5 +1,8 @@
 Link to hosted site: https://nc-news-rm.netlify.app/
 
+<img width="1434" alt="Screenshot 2024-12-09 at 17 30 39" src="https://github.com/user-attachments/assets/e5742095-5820-4b4e-8508-6fd5e829763e">
+
+
 NC-News is a website mimicking the functionality of a news website. 
 Users can:
 * View and vote on articles
